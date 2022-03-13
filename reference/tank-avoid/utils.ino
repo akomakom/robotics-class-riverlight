@@ -104,7 +104,7 @@ void drawText(String tape) {
  * Scroll the given text once, starting off-screen.
  */
 void scrollText(String tape) {
-  for ( int i = max(0, matrix.width() - (TEXT_WIDTH * tape.length())) ; i < TEXT_WIDTH * tape.length() + matrix.width() - 1 - TEXT_SPACER; i++ ) {
+  for ( int i = 0 ; i < TEXT_WIDTH * tape.length() + matrix.width() - 1 - TEXT_SPACER; i++ ) {
     matrix.fillScreen(LOW);
 
     int letter = i / TEXT_WIDTH;
