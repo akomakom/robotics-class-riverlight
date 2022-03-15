@@ -12,9 +12,9 @@ int right_distance;
 #define DISTANCE_OBSTRUCTION 50
 
 // ultrasonic server constants
-#define ANGLE_STRAIGHT 90
-#define ANGLE_LEFT     160
-#define ANGLE_RIGHT    20
+#define ANGLE_STRAIGHT 88 // 90 if the servo is perfectly mounted
+#define ANGLE_LEFT     170 // these left/right values seem to get us about 180 degrees
+#define ANGLE_RIGHT    1
 
 #define RANGEFINDER_TRIGGER 5  //ultrasonic RANGEFINDER_TRIGGER Pin
 #define RANGEFINDER_ECHO    4  //ultrasonic RANGEFINDER_ECHO Pin
