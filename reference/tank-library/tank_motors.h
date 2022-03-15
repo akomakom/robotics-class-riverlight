@@ -3,13 +3,13 @@
 
 #include <Arduino.h>
 
-#define ML_Ctrl 13  //define the direction control pin of left motor
-#define ML_PWM 11   //define the PWM control pin of left motor
-#define MR_Ctrl 12  //define the direction control pin of right motor
-#define MR_PWM 3   //define the PWM control pin of righ
+#define ML_Ctrl 13  // Direction control pin of left motor
+#define ML_PWM 11   // PWM control pin of left motor
+#define MR_Ctrl 12  // Direction control pin of right motor
+#define MR_PWM 3    // PWM control pin of right motor
 
-#define ML_Speed 200
-#define MR_Speed 200
+#define ML_Speed 200  //default left  motor drive speed
+#define MR_Speed 200  //default right motor drive speed
 
 class Tank_Motors {
   public:
@@ -28,6 +28,7 @@ class Tank_Motors {
     void spinLeft();
     void spinRight();
   private:
+    void drive(int leftDirection, int leftSpeed, int rightDirection, int rightSpeed);
     byte _pinLeftDirection;
     byte _pinLeftPWM;
     byte _pinRightDirection;

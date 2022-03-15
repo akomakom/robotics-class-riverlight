@@ -16,20 +16,20 @@ int right_distance;
 #define ANGLE_LEFT     160
 #define ANGLE_RIGHT    20
 
-#define Trig 5  //ultrasonic trig Pin
-#define Echo 4  //ultrasonic echo Pin
-int distance;
+#define RANGEFINDER_TRIGGER 5  //ultrasonic RANGEFINDER_TRIGGER Pin
+#define RANGEFINDER_ECHO    4  //ultrasonic RANGEFINDER_ECHO Pin
 #define servoPin 9  //servo Pin
+
+int distance;
 int pulsewidth;
 
 Tank_Matrix matrix(A4, A5, A3);   // display board
-Tank_Motors  motors;              // motor control library
-
+Tank_Motors  motors;              // motor controls
 
 
 //The function to control servo
 void set_servo_angle(int myangle) {
-  for (int i = 0; i <= 50; i = i + (1)) {
+  for (int i = 0; i <= 50; i = i + 1) {
     pulsewidth = myangle * 11 + 500;
     digitalWrite(servoPin, HIGH);
     delayMicroseconds(pulsewidth);
@@ -39,12 +39,12 @@ void set_servo_angle(int myangle) {
 }
 //The function to control ultrasonic sensor
 float checkdistance() {
-  digitalWrite(Trig, LOW);
+  digitalWrite(RANGEFINDER_TRIGGER, LOW);
   delayMicroseconds(2);
-  digitalWrite(Trig, HIGH);
+  digitalWrite(RANGEFINDER_TRIGGER, HIGH);
   delayMicroseconds(10);
-  digitalWrite(Trig, LOW);
-  float distance = pulseIn(Echo, HIGH) / 58.00;  //58.20, that is, 2*29.1=58.2
+  digitalWrite(RANGEFINDER_TRIGGER, LOW);
+  float distance = pulseIn(RANGEFINDER_ECHO, HIGH) / 58.00;  //58.20, that is, 2*29.1=58.2
   return distance;
 }
 
@@ -66,8 +66,8 @@ void setup() {
   pinMode(servoPin, OUTPUT);
   set_servo_angle(ANGLE_STRAIGHT); //set servo to 90°
 
-  pinMode(Trig, OUTPUT);
-  pinMode(Echo, INPUT);
+  pinMode(RANGEFINDER_TRIGGER, OUTPUT);
+  pinMode(RANGEFINDER_ECHO, INPUT);
 
 }
 void loop() {
@@ -77,18 +77,22 @@ void loop() {
   if (forward_distance < 40) //when the front distance detected is less than 20
   {
     motors.stop();  //robot stops
-    delay(300); //delay in 500ms
+    delay(300); //delay to allow vehicle to stop
 
     set_servo_angle(ANGLE_LEFT);  //Ultrasonic platform turns left
+//    delay(100);
     left_distance = checkdistance_average();  //assign the left distance detected by ultrasonic sensor to variable left_distance
-    matrix.display(String(left_distance).substring(0, 3));
+//    matrix.display(String(left_distance).substring(0, 3));
+    matrix.drawMeter(left_distance, 0, 100, 90);
     Serial.println(left_distance);
-    delay(300);
+//    delay(300);
     set_servo_angle(ANGLE_RIGHT); //Ultrasonic platform turns right
+//    delay(100);
     right_distance = checkdistance_average(); //assign the right distance detected by ultrasonic sensor to variable right_distance
-    matrix.display(String(right_distance).substring(0, 3));
+//    matrix.display(String(right_distance).substring(0, 3));
+    matrix.drawMeter(right_distance, 0, 100, 15);
     Serial.println(right_distance);
-    delay(300);
+//    delay(300);
     set_servo_angle(ANGLE_STRAIGHT);  //Ultrasonic platform turns back to right ahead
 
     if (left_distance < 50 || right_distance < 50)  //robot will turn to the longer distance side when left or right distance is less than 50cm.

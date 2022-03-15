@@ -31,46 +31,32 @@ void Tank_Motors::setDriveSpeed(int leftSpeed, int rightSpeed) {
 }
 
 void Tank_Motors::forward() {
-  digitalWrite(_pinRightDirection, LOW);
-  analogWrite(_pinRightPWM, _driveSpeedRight);
-  digitalWrite(_pinLeftDirection, LOW);
-  analogWrite(_pinLeftPWM, _driveSpeedLeft);
+  drive(LOW, _driveSpeedRight, LOW, _driveSpeedLeft);
 }
 void Tank_Motors::back() {
-  digitalWrite(_pinRightDirection, HIGH);
-  analogWrite(_pinRightPWM, _driveSpeedRight);
-  digitalWrite(_pinLeftDirection, HIGH);
-  analogWrite(_pinLeftPWM, _driveSpeedLeft);
+  drive(HIGH, _driveSpeedRight, HIGH, _driveSpeedLeft);
 }
 void Tank_Motors::stop() {
-  digitalWrite(_pinRightDirection, LOW);
-  analogWrite(_pinRightPWM, 0);
-  digitalWrite(_pinLeftDirection, LOW);
-  analogWrite(_pinLeftPWM, 0);
+  drive(LOW, 0, LOW, 0);
 }
 void Tank_Motors::curveLeft(float slowSpeedAdjustment = 0.5) {
-  digitalWrite(_pinRightDirection, LOW);
-  analogWrite(_pinRightPWM, _driveSpeedRight);
-  digitalWrite(_pinLeftDirection, LOW);
-  //prevent bad values > 1
-  analogWrite(_pinLeftPWM, _driveSpeedLeft * max(0.0, min(1.0, slowSpeedAdjustment)));
+  //prevent bad values > 1 or < 0
+  drive(LOW, _driveSpeedRight, LOW,  _driveSpeedLeft * max(0.0, min(1.0, slowSpeedAdjustment)));
 }
 void Tank_Motors::curveRight(float slowSpeedAdjustment = 0.5) {
-  digitalWrite(_pinRightDirection, LOW);
-  //prevent bad values > 1
-  analogWrite(_pinRightPWM, _driveSpeedRight * max(0.0, min(1.0, slowSpeedAdjustment)));
-  digitalWrite(_pinLeftDirection, LOW);
-  analogWrite(_pinLeftPWM, _driveSpeedLeft);
+  //prevent bad values > 1 or < 0
+  drive(LOW, _driveSpeedRight * max(0.0, min(1.0, slowSpeedAdjustment)), LOW, _driveSpeedLeft);
 }
 void Tank_Motors::spinLeft() {
-  digitalWrite(_pinRightDirection, LOW);
-  analogWrite(_pinRightPWM, _driveSpeedRight);
-  digitalWrite(_pinLeftDirection, HIGH);
-  analogWrite(_pinLeftPWM, _driveSpeedLeft);
+  drive(LOW, _driveSpeedRight, HIGH, _driveSpeedLeft);
 }
 void Tank_Motors::spinRight() {
-  digitalWrite(_pinRightDirection, HIGH);
-  analogWrite(_pinRightPWM, _driveSpeedRight);
-  digitalWrite(_pinLeftDirection, LOW);
-  analogWrite(_pinLeftPWM, _driveSpeedLeft);
+  drive(HIGH, _driveSpeedRight, LOW, _driveSpeedLeft);
+}
+
+void Tank_Motors::drive(int rightDirection, int rightSpeed, int leftDirection, int leftSpeed) {
+  digitalWrite(_pinRightDirection, rightDirection);
+  analogWrite(_pinRightPWM, rightSpeed);
+  digitalWrite(_pinLeftDirection, leftDirection);
+  analogWrite(_pinLeftPWM, leftSpeed);
 }
