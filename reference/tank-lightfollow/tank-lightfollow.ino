@@ -10,9 +10,6 @@
 Tank_Matrix matrix(A4, A5, A3);   // display board
 Tank_Motors  motors;              // motor control library
 
-int left_light;
-int right_light;
-
 void setup() {
   Serial.begin(9600);
   pinMode(light_L_Pin, INPUT);
@@ -25,8 +22,8 @@ void setup() {
 }
 
 void loop() {
-  left_light = analogRead(light_L_Pin);
-  right_light = analogRead(light_R_Pin);
+  int left_light = analogRead(light_L_Pin);
+  int right_light = analogRead(light_R_Pin);
 
   // provide visual indication of intensities
   // Let's assume that 200-1000 is the useful range
