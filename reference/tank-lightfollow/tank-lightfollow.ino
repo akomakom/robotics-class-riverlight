@@ -22,7 +22,7 @@ void setup() {
 }
 
 void loop() {
-  int left_light = analogRead(light_L_Pin);
+  int left_light  = analogRead(light_L_Pin);
   int right_light = analogRead(light_R_Pin);
 
   // provide visual indication of intensities
