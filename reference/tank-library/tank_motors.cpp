@@ -26,8 +26,8 @@ Tank_Motors::Tank_Motors(
  * in case the tank doesn't drive straight.  Default is ML_Speed/MR_Speed
  */
 void Tank_Motors::setDriveSpeed(int leftSpeed, int rightSpeed) {
-  _driveSpeedLeft = leftSpeed;
-  _driveSpeedRight = rightSpeed;
+  _driveSpeedLeft   = leftSpeed;
+  _driveSpeedRight  = rightSpeed;
 }
 
 void Tank_Motors::forward() {
@@ -39,13 +39,13 @@ void Tank_Motors::back() {
 void Tank_Motors::stop() {
   drive(LOW, 0, LOW, 0);
 }
-void Tank_Motors::curveLeft(float slowSpeedAdjustment = 0.5) {
-  //prevent bad values > 1 or < 0
-  drive(LOW, _driveSpeedRight, LOW,  _driveSpeedLeft * max(0.0, min(1.0, slowSpeedAdjustment)));
+void Tank_Motors::curveLeft(int slowSpeedAdjustmentPercent) {
+  //prevent bad values > 100 or < 0
+  drive(LOW, _driveSpeedRight, LOW,  _driveSpeedLeft * max(0, min(100, slowSpeedAdjustmentPercent)) / 100);
 }
-void Tank_Motors::curveRight(float slowSpeedAdjustment = 0.5) {
-  //prevent bad values > 1 or < 0
-  drive(LOW, _driveSpeedRight * max(0.0, min(1.0, slowSpeedAdjustment)), LOW, _driveSpeedLeft);
+void Tank_Motors::curveRight(int slowSpeedAdjustmentPercent) {
+  //prevent bad values > 100 or < 0
+  drive(LOW, _driveSpeedRight * max(0, min(100, slowSpeedAdjustmentPercent)) / 100, LOW, _driveSpeedLeft);
 }
 void Tank_Motors::spinLeft() {
   drive(LOW, _driveSpeedRight, HIGH, _driveSpeedLeft);

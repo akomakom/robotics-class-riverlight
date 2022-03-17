@@ -48,12 +48,12 @@ void loop() {
       // Left is brigher than right
       // slow the non-turning side down proportionally
 //      Serial.print("Left difference factor: "); Serial.println(1.0 - 1.0*difference/DIFFERENCE_RANGE);
-      motors.curveLeft(1.0 - 1.0*difference/DIFFERENCE_RANGE); 
+      motors.curveLeft(100 - 100*difference/DIFFERENCE_RANGE); 
     } else {
       // Right is brigher than left
       // slow the non-turning side down proportionally
 //      Serial.print("Right difference factor: "); Serial.println(1.0 + 1.0*difference/DIFFERENCE_RANGE);
-      motors.curveRight(1.0 + 1.0*difference/DIFFERENCE_RANGE); 
+      motors.curveRight(100 + 100*difference/DIFFERENCE_RANGE); 
     }
   } else {
     motors.stop();
