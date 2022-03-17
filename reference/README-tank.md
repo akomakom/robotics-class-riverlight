@@ -13,5 +13,11 @@ This device uses an Arduino UNO R3 and has:
 
 # Software Installation
 
+## Arduino Libraries
+* Adafruit GFX
+* TM16xx (Maxint)
+
+## Project Libraries
+
 On Linux, it is possible to symlink tank-library to ~/Arduino/libraries/
 On other platforms, it may be easier to copy.
