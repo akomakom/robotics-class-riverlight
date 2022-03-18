@@ -14,8 +14,13 @@ This device uses an Arduino UNO R3 and has:
 # Software Installation
 
 ## Arduino Libraries
+
+Install using the Arduino IDE's Library Manager:
 * Adafruit GFX
 * TM16xx (Maxint)
+
+Install by downloading a zip file and adding it in Arduino IDE
+* IR Tank library from keyestudio: https://wiki.keyestudio.com/Ks0428_keyestudio_Mini_Tank_Robot_V
 
 ## Project Libraries
 
