@@ -5,7 +5,7 @@
 #define TURN_TIME 500 // time it takes to make an obstacle-avoiding turn
 #define DISTANCE_OBSTRUCTION 50
 
-// ultrasonic server constants
+// ultrasonic sensor  constants
 #define ANGLE_STRAIGHT 88 // 90 if the servo is perfectly mounted
 #define ANGLE_LEFT     170 // these left/right values seem to get us about 180 degrees
 #define ANGLE_RIGHT    1
