@@ -1,4 +1,9 @@
-/*  Sound analyzer
+/*  Work in progress: 
+ *   ESP32 with neopixels and a sound module
+ *   
+ *   Original code:
+ *   
+ *   Sound analyzer
     Several display modes (spectrum, sound amplitude, envelope)
     (by) Lesept October 2020
 */
@@ -42,7 +47,7 @@
 #define PIN 5 // Pin where NeoPixels are connected
 
 // Declare our NeoPixel strip object:
-Adafruit_NeoPixel strip(64, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip(144, PIN, NEO_GRB + NEO_KHZ800);
 
 
 
@@ -64,6 +69,7 @@ void setup() {
   
   strip.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
   strip.show();  // Turn OFF all pixels ASAP
+  strip.setBrightness(10);
 
   pinMode(BUTTON_1, INPUT_PULLUP);
   pinMode(BUTTON_2, INPUT_PULLUP);

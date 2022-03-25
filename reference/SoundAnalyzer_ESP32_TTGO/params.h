@@ -12,7 +12,7 @@
 
 // FFT parameters
 #define SAMPLES 256
-#define MAX_FREQ 12 // kHz
+#define MAX_FREQ 10 // kHz
 // Attenuation for display
 #define COEF 60
 #define COEF2 5

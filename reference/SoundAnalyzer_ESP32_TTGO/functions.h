@@ -261,7 +261,7 @@ void displaySpectrum () {
   
     // if we have more leds than bars (frequency segments), 
     // then display one bar across multiple leds
-    for (int ledNum = ledStart; ledNum < (strip.numPixels()/total) + ledStart ; ledNum++) {
+    for (int ledNum = ledStart; ledNum <= (strip.numPixels()/total) + ledStart ; ledNum++) {
       int pixelHue = 0 + (ledNum * 65536L / strip.numPixels());
       strip.setPixelColor(ledNum, strip.gamma32(strip.ColorHSV(pixelHue, 255, ledBrightness)));
     }
