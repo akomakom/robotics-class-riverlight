@@ -10,6 +10,10 @@
 #define LINE_COLOR          0
 #define BACKGROUND_COLOR    1
 #define SENSOR_COUNT        5
+// when confused, wiggle for this long to try to find the line
+#define CONFUSED_WIGGLE_MODE_TIME    1500
+// when first getting confused, continue previous operation this long
+#define CONFUSED_CONTINUE_TIME 100 
 Tank_Motors  motors;              // motor controls
 
 bool state[SENSOR_COUNT];
@@ -42,11 +46,14 @@ void action() {
     case 0:
     case SENSOR_COUNT:
       // all are reading the same.
-//      motors.stop(); // we have no idea what's going on
-      if ((millis() - confusionStart) < 1000) {
+      // try to wiggle about to find the line
+      if ((millis() - confusionStart) < CONFUSED_CONTINUE_TIME) {
+        // do nothing yet, let previous operation continue
+      } else if ((millis() - confusionStart) < CONFUSED_WIGGLE_MODE_TIME) {
         Serial.println("Confusion Mode");
         wiggle();
       } else {
+        //confusion mode time ran out.
         motors.stop();
       }
       break;
@@ -69,9 +76,8 @@ void action() {
           break;
       }
       confusionStart = millis();
-      Serial.println("Reset confusion start to " + String(confusionStart) + " based on " + String(millis()));
-      Serial.println("Therefore Confused: " + String(millis() - confusionStart));
- 
+//      Serial.println("Reset confusion start to " + String(confusionStart) + " based on " + String(millis()));
+//      Serial.println("Therefore Confused: " + String(millis() - confusionStart));
   }
     
 }
